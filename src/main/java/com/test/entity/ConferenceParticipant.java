@@ -1,0 +1,31 @@
+package com.test.entity;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class ConferenceParticipant {
+
+    private String fullName;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate birthDate;
+
+    public ConferenceParticipant(String fullName, LocalDate birthDate) {
+        this.fullName = fullName;
+        this.birthDate = birthDate;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                    "Full Name: " + fullName +
+                    "Birth Date: " + birthDate +
+                "}";
+    }
+}
