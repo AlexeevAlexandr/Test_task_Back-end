@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
 public class WebController {
     private final ConferenceController conferenceController;
-    private Conference conference;
 
     public WebController(ConferenceController conferenceController) {
         this.conferenceController = conferenceController;
@@ -34,6 +35,7 @@ public class WebController {
 
     @GetMapping("/register")
     public String register(Model model) {
+        Conference conference = new Conference();
         model.addAttribute("conference", conference);
         return "register";
     }
@@ -41,11 +43,25 @@ public class WebController {
     @PostMapping(value = "/conferences")
     public String createOrder(@ModelAttribute("conferenceParticipant") ConferenceParticipant conferenceParticipant, String[] data) {
         String id = data[0];
-        conference = conferenceController.getById(id);
+        Conference conference = conferenceController.getById(id);
         List<ConferenceParticipant> participants = conference.getParticipants();
         participants.add(conferenceParticipant);
         conference.setParticipants(participants);
-        conference = conferenceController.update(conference);
+        conferenceController.update(conference);
         return "redirect:/register";
+    }
+
+    @GetMapping("/addConference")
+    public String addConference(Model model) {
+        Conference conference = new Conference();
+        model.addAttribute("conference", conference);
+        return "addConference";
+    }
+
+    @PostMapping(value = "/addConference")
+    public String addConference(String[] data) {
+        conferenceController.create(new Conference(data[0],
+                LocalDateTime.parse(data[1].replace("T", " "), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
+        return "redirect:/conferences";
     }
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Add Conference</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <th:block th:include="header"/>
+
+    <div class="container">
+        <h2>Register new conference</h2>
+        <form th:action="@{/addConference}" method="post">
+            <div class="form-group">
+                <label for="conferenceName">Conference Name:</label>
+                <input type="text" name="data" class="form-control" id="conferenceName" th:required="true"/>
+            </div>
+            <div class="form-group">
+                <label for="date">Conference date:</label>
+                <input type="datetime-local" name="data" class="form-control" id="date" th:required="true"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-primary">Cancel</button>
+        </form>
+    </div>
+</body>
+</html>
