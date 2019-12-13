@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Conferences</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <th:block th:include="header"/>
+
+    <div class="container">
+        <h2 style="text-align: center">Conference list</h2>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Conference name</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each ="conference : ${conferences}">
+                    <td th:utext="${conference.conferenceName}">...</td>
+                    <td th:utext="${conference.conferenceDateTime}">...</td>
+                    <td>
+                        <div class="container">
+                            <button type="button" class="btn btn-primary" data-toggle="dropdown">Click to register</button>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">
+                                    <form th:action="@{/conferences}" th:object="${conferenceParticipant}" method="post">
+                                        <div class="form-group">
+                                            <label for="name">Name:</label>
+                                            <input type="text" th:field="*{fullName}" class="form-control" placeholder="Enter full name" id="name"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="birthDate">Birth date:</label>
+                                            <input type="date" th:field="*{birthDate}" class="form-control" placeholder="Enter birth date" id="birthDate"/>
+                                        </div>
+                                        <label>
+                                            <textarea th:text="${conference.id}" name="data" style="display: none">...</textarea>
+                                        </label>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
