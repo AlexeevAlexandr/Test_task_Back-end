@@ -68,6 +68,23 @@
                             </div>
                         </div>
                     </td>
+                    <td>
+                        <div class="container">
+                            <button type="button" class="btn btn-primary" data-toggle="dropdown">Delete</button>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">
+                                    <form th:action="@{/deleteConference}" method="post">
+                                        <h2 style="text-align: center">Confirm</h2>
+                                        <label>
+                                            <textarea th:text="${conference.id}" name="data" style="display: none">...</textarea>
+                                        </label>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="reset" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>

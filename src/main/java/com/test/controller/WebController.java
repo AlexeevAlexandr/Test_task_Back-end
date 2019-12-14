@@ -4,6 +4,7 @@ import com.test.entity.Conference;
 import com.test.entity.ConferenceParticipant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +71,12 @@ public class WebController {
         Conference conference = conferenceController.getById(status[0]);
         conference.setStatus(status[1]);
         conferenceController.update(conference);
+        return "redirect:/conferences";
+    }
+
+    @PostMapping(value = "/deleteConference")
+    public String deleteConference(String[] data) {
+        conferenceController.delete(data[0]);
         return "redirect:/conferences";
     }
 }
