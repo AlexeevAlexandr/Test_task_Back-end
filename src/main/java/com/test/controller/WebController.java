@@ -64,4 +64,12 @@ public class WebController {
                 LocalDateTime.parse(data[1].replace("T", " "), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
         return "redirect:/conferences";
     }
+
+    @PostMapping(value = "/activity")
+    public String changeActivity(String[] status) {
+        Conference conference = conferenceController.getById(status[0]);
+        conference.setStatus(status[1]);
+        conferenceController.update(conference);
+        return "redirect:/conferences";
+    }
 }

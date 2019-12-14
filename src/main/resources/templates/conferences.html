@@ -18,6 +18,7 @@
                 <tr>
                     <th>Conference name</th>
                     <th>Date</th>
+                    <th>Status</th>
                     <th>Registered</th>
                 </tr>
             </thead>
@@ -25,6 +26,22 @@
                 <tr th:each ="conference : ${conferences}">
                     <td th:utext="${conference.conferenceName}">...</td>
                     <td th:utext="${conference.conferenceDateTime}">...</td>
+                    <td>
+                        <div class="container">
+                            <text th:utext="${conference.status}" data-toggle="dropdown">...</text>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">
+                                    <form th:action="@{/activity}" method="post">
+                                        <label>
+                                            <textarea th:text="${conference.id}" name="status" style="display: none">...</textarea>
+                                        </label>
+                                        <button type="submit" class="btn btn-primary" th:value="active" name="status">active</button>
+                                        <button type="submit" class="btn btn-primary" th:value="canceled" name="status">canceled</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                     <td th:utext="${conference.getParticipants().size()}">...</td>
                     <td>
                         <div class="container">

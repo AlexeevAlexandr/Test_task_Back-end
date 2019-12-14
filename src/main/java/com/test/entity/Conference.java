@@ -21,6 +21,7 @@ public class Conference {
     @Id
     private String id;
     private String conferenceName;
+    private String status = "active";
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime conferenceDateTime;
