@@ -49,18 +49,19 @@
                             <div class="dropdown-menu">
                                 <div class="dropdown-item">
                                     <form th:action="@{/conferences}" th:object="${conferenceParticipant}" method="post">
+                                        <h2 style="text-align: center">Registration form</h2>
                                         <div class="form-group">
                                             <label for="name">Name:</label>
-                                            <input type="text" th:field="*{fullName}" class="form-control" placeholder="Enter full name" id="name"/>
+                                            <input type="text" th:field="*{fullName}" class="form-control" placeholder="Enter full name" id="name" th:required="true"/>
                                         </div>
                                         <div class="form-group">
                                             <label for="birthDate">Birth date:</label>
-                                            <input type="date" th:field="*{birthDate}" class="form-control" placeholder="Enter birth date" id="birthDate"/>
+                                            <input type="date" th:field="*{birthDate}" class="form-control" placeholder="Enter birth date" id="birthDate" th:required="true"/>
                                         </div>
                                         <label>
                                             <textarea th:text="${conference.id}" name="data" style="display: none">...</textarea>
                                         </label>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary" onclick="emptyString()">Submit</button>
                                         <button type="reset" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                     </form>
                                 </div>
@@ -71,6 +72,14 @@
             </tbody>
         </table>
     </div>
-
+    <script>
+        function emptyString() {
+            let name = document.getElementById('name').value;
+            let birthDate = document.getElementById('birthDate').value;
+            if (name === '' || birthDate === '') {
+                alert('To register, you must enter the full name and date of birth')
+            }
+        }
+    </script>
 </body>
 </html>
