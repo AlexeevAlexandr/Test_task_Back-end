@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
-public class WebController {
+public class WebController extends ControllerHelper{
     private final ConferenceController conferenceController;
 
     public WebController(ConferenceController conferenceController) {
@@ -77,5 +77,33 @@ public class WebController {
     public String deleteConference(String[] data) {
         conferenceController.delete(data[0]);
         return "redirect:/conferences";
+    }
+
+    @GetMapping("/participants")
+    public String participants(Model model) {
+        model.addAttribute("participants", conferenceController.getById(id).getParticipants());
+        return "participants";
+    }
+
+    @PostMapping("/participants")
+    public String participants(String[] conferenceId, Model model) {
+        id = conferenceId[0];
+        conference = conferenceController.getById(id);
+        model.addAttribute("participants", conference.getParticipants());
+        return "participants";
+    }
+
+    @PostMapping("/deleteParticipant")
+    public String deleteParticipant(String[] participant) {
+        List<ConferenceParticipant> participants = conference.getParticipants();
+        for (ConferenceParticipant p : participants) {
+            if (p.getBirthDate().toString().equals(participant[1]) && p.getFullName().equals(participant[0])) {
+                participants.remove(p);
+                break;
+            }
+        }
+        conference.setParticipants(participants);
+        conferenceController.update(conference);
+        return "redirect:/participants";
     }
 }
