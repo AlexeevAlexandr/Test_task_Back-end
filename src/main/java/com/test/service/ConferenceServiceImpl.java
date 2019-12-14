@@ -6,6 +6,7 @@ import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -23,6 +24,7 @@ public class ConferenceServiceImpl implements ConferenceService {
         try {
             log.info("attempt to get all conferences");
             List<Conference> conferences = conferenceRepository.findAll();
+            conferences.sort(Comparator.comparing(Conference::getConferenceDateTime));
             log.info("attempt to get all conferences - success");
             return conferences;
         } catch (Exception e) {
