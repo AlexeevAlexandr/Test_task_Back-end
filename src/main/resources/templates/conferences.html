@@ -18,12 +18,14 @@
                 <tr>
                     <th>Conference name</th>
                     <th>Date</th>
+                    <th>Registered</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each ="conference : ${conferences}">
                     <td th:utext="${conference.conferenceName}">...</td>
                     <td th:utext="${conference.conferenceDateTime}">...</td>
+                    <td th:utext="${conference.getParticipants().size()}">...</td>
                     <td>
                         <div class="container">
                             <button type="button" class="btn btn-primary" data-toggle="dropdown">Click to register</button>

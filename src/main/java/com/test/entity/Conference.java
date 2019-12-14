@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,7 +24,7 @@ public class Conference {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime conferenceDateTime;
-    private List<ConferenceParticipant> participants;
+    private List<ConferenceParticipant> participants = new ArrayList<>();
     private ConferenceRoom conferenceRoom;
 
     public Conference(String conferenceName, LocalDateTime conferenceDateTime) {
