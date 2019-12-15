@@ -12,7 +12,7 @@
     <th:block th:include="header"/>
 
     <div class="container">
-        <h2 style="text-align: center">Conference list <a class="nav-link" href="/addConference">Click to add Conference</a></h2>
+        <h2 style="text-align: center">Conference list <a class="nav-link" href="/addConference" id="clickToAddConference">Click to add Conference</a></h2>
         <table class="table table-dark table-hover">
             <thead>
                 <tr>
@@ -29,7 +29,7 @@
                     <td th:utext="${conference.conferenceDateTime}">...</td>
                     <td>
                         <div class="container">
-                            <text th:utext="${conference.status}" data-toggle="dropdown">...</text>
+                            <text th:utext="${conference.status}" data-toggle="dropdown" id="conferenceStatus">...</text>
                             <div class="dropdown-menu">
                                 <div class="dropdown-item">
                                     <form th:action="@{/activity}" method="post">
@@ -46,7 +46,7 @@
                     <td>
                         <div class="container">
                             <form th:action="@{/participants}" method="post">
-                                <button type="submit" class="btn btn-primary"><text th:utext="${conference.getParticipants().size()}">...</text></button>
+                                <button type="submit" class="btn btn-primary"><text th:utext="${conference.getParticipants().size()}" id="numberOfRegistered">...</text></button>
                                 <label>
                                     <textarea th:text="${conference.id}" name="conferenceId" style="display: none">...</textarea>
                                 </label>
@@ -59,7 +59,7 @@
                                 <label>
                                     <textarea th:text="${conference.id}" name="id" style="display: none">...</textarea>
                                 </label>
-                                <button type="submit">
+                                <button type="submit" id="selectRoom">
                                     <text th:utext="${conference.conferenceRoom.roomName}">...</text>
                                     <text th:if="${conference.conferenceRoom.roomName == null}">click to select</text>
                                 </button>
@@ -68,7 +68,7 @@
                     </td>
                     <td>
                         <div class="container">
-                            <button type="button" class="btn btn-primary" data-toggle="dropdown">Click to register</button>
+                            <button type="button" class="btn btn-primary" data-toggle="dropdown" id="clickToRegisterButton">Click to register</button>
                             <div class="dropdown-menu">
                                 <div class="dropdown-item">
                                     <form th:action="@{/conferences}" th:object="${conferenceParticipant}" method="post">
@@ -93,7 +93,7 @@
                     </td>
                     <td>
                         <div class="container">
-                            <button type="button" class="btn btn-primary" data-toggle="dropdown">Delete</button>
+                            <button type="button" class="btn btn-primary" data-toggle="dropdown" id="deleteButton">Delete</button>
                             <div class="dropdown-menu">
                                 <div class="dropdown-item">
                                     <form th:action="@{/deleteConference}" method="post">
