@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -95,7 +96,9 @@ public class WebController extends ControllerHelper{
     public String participants(String[] conferenceId, Model model) {
         id = conferenceId[0];
         conference = conferenceController.getById(id);
-        model.addAttribute("participants", conference.getParticipants());
+        List<ConferenceParticipant> conferenceParticipants = conference.getParticipants();
+        conferenceParticipants.sort(Comparator.comparing(ConferenceParticipant::getFullName));
+        model.addAttribute("participants", conferenceParticipants);
         return "participants";
     }
 
@@ -141,9 +144,9 @@ public class WebController extends ControllerHelper{
 
     @PostMapping("/acceptRoom")
     public String acceptRoom(String[] roomId) {
-            ConferenceRoom conferenceRoom = conferenceRoomController.getById(roomId[0]);
-            conference.setConferenceRoom(conferenceRoom);
-            conferenceController.update(conference);
-        return "redirect:/conferences";
+        ConferenceRoom conferenceRoom = conferenceRoomController.getById(roomId[0]);
+        conference.setConferenceRoom(conferenceRoom);
+        conferenceController.update(conference);
+    return "redirect:/conferences";
     }
 }
