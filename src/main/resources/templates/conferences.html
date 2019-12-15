@@ -12,7 +12,7 @@
     <th:block th:include="header"/>
 
     <div class="container">
-        <h2 style="text-align: center">Conference list</h2>
+        <h2 style="text-align: center">Conference list <a class="nav-link" href="/addConference">Click to add Conference</a></h2>
         <table class="table table-dark table-hover">
             <thead>
                 <tr>
@@ -20,6 +20,7 @@
                     <th>Date</th>
                     <th>Status</th>
                     <th>Registered</th>
+                    <th>Room</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +50,19 @@
                                 <label>
                                     <textarea th:text="${conference.id}" name="conferenceId" style="display: none">...</textarea>
                                 </label>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="container">
+                            <form th:action="@{/selectRoom}" method="post">
+                                <label>
+                                    <textarea th:text="${conference.id}" name="id" style="display: none">...</textarea>
+                                </label>
+                                <button type="submit">
+                                    <text th:utext="${conference.conferenceRoom.roomName}">...</text>
+                                    <text th:if="${conference.conferenceRoom.roomName == null}">click to select</text>
+                                </button>
                             </form>
                         </div>
                     </td>

@@ -17,4 +17,6 @@ public interface ConferenceRoomService {
     void delete(String id);
 
     boolean exists(String id);
+
+    List<ConferenceRoom> findByIdGreaterThanEqual(int seats);
 }

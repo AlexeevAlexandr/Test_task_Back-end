@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Conference rooms</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <th:block th:include="header"/>
+
+    <div class="container">
+        <h2 style="text-align: center">Conference room list <a class="nav-link" href="/addConferenceRoom">Click to add Conference room</a></h2>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Room name</th>
+                    <th>Location</th>
+                    <th>Seats number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each ="room : ${conferenceRooms}">
+                    <td th:utext="${room.roomName}">...</td>
+                    <td th:utext="${room.location}">...</td>
+                    <td th:utext="${room.maxSeats}">...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

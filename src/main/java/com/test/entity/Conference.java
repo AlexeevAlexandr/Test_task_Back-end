@@ -26,7 +26,7 @@ public class Conference {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime conferenceDateTime;
     private List<ConferenceParticipant> participants = new ArrayList<>();
-    private ConferenceRoom conferenceRoom;
+    private ConferenceRoom conferenceRoom = new ConferenceRoom();
 
     public Conference(String conferenceName, LocalDateTime conferenceDateTime) {
         this.conferenceName = conferenceName;

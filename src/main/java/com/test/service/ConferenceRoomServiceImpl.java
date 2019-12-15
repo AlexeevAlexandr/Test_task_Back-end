@@ -93,4 +93,17 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
             return false;
         }
     }
+
+    @Override
+    public List<ConferenceRoom> findByIdGreaterThanEqual(int seats) {
+        try {
+            log.info("attempt to get allAvailable rooms by seats number");
+            List<ConferenceRoom> conferenceRooms = conferenceRoomRepository.findByMaxSeatsGreaterThanEqual(seats);
+            log.info("attempt to get allAvailable rooms by seats number - success");
+            return conferenceRooms;
+        } catch (Exception e) {
+            log.warning("attempt to get allAvailable rooms by seats number - false\n" + e.getMessage());
+            return null;
+        }
+    }
 }

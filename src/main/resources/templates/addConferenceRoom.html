@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <th:block th:include="header"/>
+
+    <div class="container">
+        <form th:action="@{/addConferenceRoom}" th:object="${conferenceRoom}" method="post">
+            <h2 style="text-align: center">Create conference room</h2>
+            <div class="form-group">
+                <label for="name">Room name:</label>
+                <input type="text" th:field="*{roomName}" class="form-control" placeholder="Enter room name" id="name" th:required="true"/>
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Location:</label>
+                <input type="text" th:field="*{location}" class="form-control" placeholder="Enter location" id="birthDate" th:required="true"/>
+            </div>
+            <div class="form-group">
+                <label for="maxSeats">Seats number:</label>
+                <input type="number" th:field="*{maxSeats}" class="form-control" placeholder="Enter max seats number" id="maxSeats" th:required="true"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-primary">Cancel</button>
+        </form>
+    </div>
+</body>
+</html>

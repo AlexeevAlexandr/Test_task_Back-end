@@ -2,6 +2,8 @@ package com.test.controller;
 
 import com.test.entity.Conference;
 import com.test.entity.ConferenceParticipant;
+import com.test.entity.ConferenceRoom;
+import com.test.service.ConferenceRoomService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +17,13 @@ import java.util.List;
 @Controller
 public class WebController extends ControllerHelper{
     private final ConferenceController conferenceController;
+    private final ConferenceRoomController conferenceRoomController;
+    private final ConferenceRoomService conferenceRoomService;
 
-    public WebController(ConferenceController conferenceController) {
+    public WebController(ConferenceController conferenceController, ConferenceRoomController conferenceRoomController, ConferenceRoomService conferenceRoomService) {
         this.conferenceController = conferenceController;
+        this.conferenceRoomController = conferenceRoomController;
+        this.conferenceRoomService = conferenceRoomService;
     }
 
     @GetMapping("/home")
@@ -105,5 +111,39 @@ public class WebController extends ControllerHelper{
         conference.setParticipants(participants);
         conferenceController.update(conference);
         return "redirect:/participants";
+    }
+
+    @GetMapping("/conferenceRooms")
+    public String conferenceRooms(Model model) {
+        model.addAttribute("conferenceRooms", conferenceRoomController.getAll());
+        return "conferenceRooms";
+    }
+
+    @GetMapping("/addConferenceRoom")
+    public String addConferenceRoom(Model model) {
+        ConferenceRoom conferenceRoom = new ConferenceRoom();
+        model.addAttribute("conferenceRoom", conferenceRoom);
+        return "addConferenceRoom";
+    }
+
+    @PostMapping("/addConferenceRoom")
+    public String addConferenceRoom(@ModelAttribute("conferenceParticipant") ConferenceRoom conferenceRoom) {
+        conferenceRoomController.create(conferenceRoom);
+        return "redirect:/conferenceRooms";
+    }
+
+    @PostMapping("/selectRoom")
+    public String selectRoom(String[] id, Model model) {
+        conference = conferenceController.getById(id[0]);
+        model.addAttribute("conferenceRooms", conferenceRoomService.findByIdGreaterThanEqual(conference.getParticipants().size()));
+        return "selectRoom";
+    }
+
+    @PostMapping("/acceptRoom")
+    public String acceptRoom(String[] roomId) {
+            ConferenceRoom conferenceRoom = conferenceRoomController.getById(roomId[0]);
+            conference.setConferenceRoom(conferenceRoom);
+            conferenceController.update(conference);
+        return "redirect:/conferences";
     }
 }
