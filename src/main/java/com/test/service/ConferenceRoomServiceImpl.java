@@ -82,6 +82,17 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
     }
 
     @Override
+    public void deleteConferenceRoomByRoomName(String name) {
+        try {
+            log.info("attempt to delete Conference room by name");
+            conferenceRoomRepository.deleteConferenceRoomByRoomName(name);
+            log.info("attempt to delete Conference room by name - success");
+        } catch (Exception e) {
+            log.warning("attempt to delete Conference room by name - false\n" + e.getMessage());
+        }
+    }
+
+    @Override
     public boolean exists(String id) {
         try {
             log.info("attempt to check conference room");

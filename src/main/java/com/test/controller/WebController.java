@@ -134,6 +134,12 @@ public class WebController extends ControllerHelper{
         return "redirect:/conferenceRooms";
     }
 
+    @GetMapping("/selectRoom")
+    public String selectRoom(Model model) {
+        model.addAttribute("conferenceRooms", conferenceRoomService.findByIdGreaterThanEqual(conference.getParticipants().size()));
+        return "selectRoom";
+    }
+
     @PostMapping("/selectRoom")
     public String selectRoom(String[] id, Model model) {
         conference = conferenceService.getById(id[0]);

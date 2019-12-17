@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h3><a href="/conferences">Return</a></h3>
+<h3><a href="/conferences" id="returnLink">Return</a></h3>
 
 <div class="container">
     <h2 style="text-align: center">Participant list</h2>
@@ -23,12 +23,12 @@
         </thead>
         <tbody>
         <tr th:each ="participant : ${participants}">
-            <td th:utext="${participant.fullName}">...</td>
-            <td th:utext="${participant.birthDate}">...</td>
+            <td th:utext="${participant.fullName}" th:value="${participant.fullName}" th:id="participantName + ${participant.fullName}">...</td>
+            <td th:utext="${participant.birthDate}" th:value="${participant.birthDate}" th:id="participantBirthDate + ${participant.birthDate}">...</td>
 
             <td>
                 <div class="container">
-                    <button type="button" class="btn btn-primary" data-toggle="dropdown">Delete</button>
+                    <button type="button" class="btn btn-primary" data-toggle="dropdown" th:id="delete + ${participant.fullName}">Delete</button>
                     <div class="dropdown-menu">
                         <div class="dropdown-item">
                             <form th:action="@{/deleteParticipant}" method="post">
@@ -37,8 +37,8 @@
                                     <textarea th:text="${participant.fullName}" name="participant" style="display: none">...</textarea>
                                     <textarea th:text="${participant.birthDate}" name="participant" style="display: none">...</textarea>
                                 </label>
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                                <button type="reset" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger" th:id="submit + ${participant.fullName}">Delete</button>
+                                <button type="reset" class="btn btn-primary" th:id="reset + ${participant.fullName}">Cancel</button>
                             </form>
                         </div>
                     </div>

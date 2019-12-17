@@ -12,4 +12,7 @@ import java.util.List;
 public interface ConferenceRoomRepository extends MongoRepository<ConferenceRoom, String> {
 
     List<ConferenceRoom> findByMaxSeatsGreaterThanEqual(long maxSeats);
+
+    void deleteConferenceRoomByRoomName(String name);
+
 }

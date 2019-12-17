@@ -17,13 +17,19 @@ public class ConferencePage extends PageObject{
     private WebElement conferenceStatus;
 
     @FindBy(id = "activeStatusTest Conference")
-    private WebElement activeStatus;
+    private WebElement conferenceStatusActive;
+
+    @FindBy(id = "canceledStatusTest Conference")
+    private WebElement conferenceStatusCanceled;
 
     @FindBy(id = "numberOfRegisteredTest Conference")
     private WebElement numberOfRegistered;
 
     @FindBy(id = "selectRoomTest Conference")
     private WebElement selectRoom;
+
+    @FindBy(id = "selectedRoomTest Conference")
+    private WebElement selectedRoom;
 
     @FindBy(id = "clickToRegisterButtonTest Conference")
     private WebElement clickToRegisterButton;
@@ -34,6 +40,15 @@ public class ConferencePage extends PageObject{
     @FindBy(id = "confirmDeletingTest Conference")
     private WebElement deleteConference;
 
+    @FindBy(id = "nameTest Conference")
+    private WebElement name;
+
+    @FindBy(id = "birthDateTest Conference")
+    private WebElement birthDate;
+
+    @FindBy(id = "submitTest Conference")
+    private WebElement submit;
+
     public void addConference() {
         this.clickToAddConference.click();
     }
@@ -43,8 +58,36 @@ public class ConferencePage extends PageObject{
         this.deleteConference.click();
     }
 
-    public void changeStatus() {
+    public void setStatusCanceled() {
         this.conferenceStatus.click();
-        this.activeStatus.click();
+        this.conferenceStatusCanceled.click();
+    }
+
+    public void setStatusActive() {
+        this.conferenceStatus.click();
+        this.conferenceStatusActive.click();
+    }
+
+    public void showRegistered() {
+        this.numberOfRegistered.click();
+    }
+
+    public void registerParticipant(String name, String date) {
+        this.clickToRegisterButton.click();
+        this.name.sendKeys(name);
+        this.birthDate.sendKeys(date);
+        this.submit.click();
+    }
+
+    public void selectRoom() {
+        this.selectRoom.click();
+    }
+
+    public String checkSelectedRoom() {
+        return this.selectedRoom.getAttribute("value");
+    }
+
+    public String checkChangedStatus() {
+        return this.conferenceStatus.getAttribute("value");
     }
 }

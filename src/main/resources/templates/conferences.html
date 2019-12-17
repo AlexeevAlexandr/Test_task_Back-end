@@ -29,7 +29,7 @@
                     <td th:utext="${conference.conferenceDateTime}">...</td>
                     <td>
                         <div class="container">
-                            <text th:utext="${conference.status}" data-toggle="dropdown" th:id="conferenceStatus + ${conference.conferenceName}">...</text>
+                            <text th:utext="${conference.status}" data-toggle="dropdown" th:value="${conference.status}" th:id="conferenceStatus + ${conference.conferenceName}">...</text>
                             <div class="dropdown-menu">
                                 <div class="dropdown-item">
                                     <form th:action="@{/activity}" method="post">
@@ -47,7 +47,7 @@
                         <div class="container">
                             <form th:action="@{/participants}" method="post">
                                 <button type="submit" class="btn btn-primary" th:id="numberOfRegistered + ${conference.conferenceName}">
-                                    <text th:utext="${conference.getParticipants().size()}" id="numberOfRegistered">...</text>
+                                    <text th:utext="${conference.getParticipants().size()}">...</text>
                                 </button>
                                 <label>
                                     <textarea th:text="${conference.id}" name="conferenceId" style="display: none">...</textarea>
@@ -62,7 +62,7 @@
                                     <textarea th:text="${conference.id}" name="id" style="display: none">...</textarea>
                                 </label>
                                 <button type="submit" th:id="selectRoom + ${conference.conferenceName}">
-                                    <text th:utext="${conference.conferenceRoom.roomName}">...</text>
+                                    <text th:utext="${conference.conferenceRoom.roomName}"  th:value="${conference.conferenceRoom.roomName}" th:id="selectedRoom + ${conference.conferenceName}">...</text>
                                     <text th:if="${conference.conferenceRoom.roomName == null}">click to select</text>
                                 </button>
                             </form>
@@ -76,17 +76,17 @@
                                     <form th:action="@{/conferences}" th:object="${conferenceParticipant}" method="post">
                                         <h2 style="text-align: center">Registration form</h2>
                                         <div class="form-group">
-                                            <label for="name">Name:</label>
-                                            <input type="text" th:field="*{fullName}" class="form-control" placeholder="Enter full name" id="name" th:required="true"/>
+                                            <label th:for="name + ${conference.conferenceName}">Name:</label>
+                                            <input type="text" th:field="*{fullName}" class="form-control" placeholder="Enter full name" th:id="name + ${conference.conferenceName}" th:required="true"/>
                                         </div>
                                         <div class="form-group">
-                                            <label for="birthDate">Birth date:</label>
-                                            <input type="date" th:field="*{birthDate}" class="form-control" placeholder="Enter birth date" id="birthDate" th:required="true"/>
+                                            <label th:for="birthDate + ${conference.conferenceName}">Birth date:</label>
+                                            <input type="date" th:field="*{birthDate}" class="form-control" placeholder="Enter birth date" th:id="birthDate + ${conference.conferenceName}" th:required="true"/>
                                         </div>
                                         <label>
                                             <textarea th:text="${conference.id}" name="data" style="display: none">...</textarea>
                                         </label>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary" th:id="submit + ${conference.conferenceName}">Submit</button>
                                         <button type="reset" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                     </form>
                                 </div>
