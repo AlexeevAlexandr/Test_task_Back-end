@@ -5,6 +5,7 @@ import com.test.repository.ConferenceRepository;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -54,6 +55,15 @@ public class ConferenceServiceImpl implements ConferenceService {
             log.info("attempt to delete conference - success");
         } catch (Exception e) {
             log.warning("attempt to delete conference - false\n" + e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteByName(String name) {
+        try {
+            conferenceRepository.deleteConferenceByConferenceName(name);
+        } catch (Exception e) {
+            log.warning(" \n" + e.getMessage());
         }
     }
 
