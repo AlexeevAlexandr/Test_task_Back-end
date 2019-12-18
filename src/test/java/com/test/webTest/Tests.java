@@ -52,8 +52,8 @@ public class Tests {
         Main.main(args);
 
         //set driver
-//        System.setProperty("webdriver.chrome.driver","/home/alexandr/IdeaProjects/Test_task_Back-end/src/test/java/com/test/webTest/chromedriver/chromedriver");
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\IMTOP\\IdeaProjects\\test\\src\\test\\java\\com\\test\\webTest\\chromedriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","/home/alexandr/IdeaProjects/Test_task_Back-end/src/test/java/com/test/webTest/chromedriver/chromedriver");
+//        System.setProperty("webdriver.chrome.driver","C:\\Users\\IMTOP\\IdeaProjects\\test\\src\\test\\java\\com\\test\\webTest\\chromedriver\\chromedriver.exe");
 
         //set language
         ChromeOptions options = new ChromeOptions();

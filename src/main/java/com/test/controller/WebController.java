@@ -17,7 +17,9 @@ import java.util.Comparator;
 import java.util.List;
 
 @Controller
-public class WebController extends ControllerHelper{
+public class WebController{
+    private String id;
+    private Conference conference;
     private final ConferenceService conferenceService;
     private final ConferenceRoomService conferenceRoomService;
 
