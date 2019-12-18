@@ -36,18 +36,21 @@ import static org.junit.Assert.assertEquals;
 public class Tests {
 
     @Autowired
-    ConferenceService conferenceService;
+    private ConferenceService conferenceService;
 
     @Autowired
-    ConferenceRoomService conferenceRoomService;
+    private ConferenceRoomService conferenceRoomService;
 
     @Autowired
-    ConferenceParticipantService conferenceParticipantService;
+    private ConferenceParticipantService conferenceParticipantService;
 
     private static WebDriver driver;
 
     @BeforeClass
     public static void setup(){
+        String[] args = new String[0];
+        Main.main(args);
+
         //set driver
 //        System.setProperty("webdriver.chrome.driver","/home/alexandr/IdeaProjects/Test_task_Back-end/src/test/java/com/test/webTest/chromedriver/chromedriver");
         System.setProperty("webdriver.chrome.driver","C:\\Users\\IMTOP\\IdeaProjects\\test\\src\\test\\java\\com\\test\\webTest\\chromedriver\\chromedriver.exe");
