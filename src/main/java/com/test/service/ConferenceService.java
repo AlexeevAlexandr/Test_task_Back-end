@@ -2,7 +2,6 @@ package com.test.service;
 
 import com.test.entity.Conference;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ConferenceService {
@@ -20,4 +19,6 @@ public interface ConferenceService {
     boolean exists(String id);
 
     Conference update(Conference conference);
+
+    Conference getConferenceByName(String name);
 }

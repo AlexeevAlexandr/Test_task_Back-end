@@ -12,7 +12,7 @@
     <th:block th:include="header"/>
 
     <div class="container">
-        <h2 style="text-align: center">Conference room list <a class="nav-link" href="/addConferenceRoom">Click to add Conference room</a></h2>
+        <h2 style="text-align: center">Conference room list <a class="nav-link" href="/addConferenceRoom" id="addConferenceRoom">Click to add Conference room</a></h2>
         <table class="table table-dark table-hover">
             <thead>
                 <tr>
@@ -23,9 +23,9 @@
             </thead>
             <tbody>
                 <tr th:each ="room : ${conferenceRooms}">
-                    <td th:utext="${room.roomName}">...</td>
-                    <td th:utext="${room.location}">...</td>
-                    <td th:utext="${room.maxSeats}">...</td>
+                    <td th:utext="${room.roomName}" th:id="roomName + ${room.roomName}" th:value="${room.roomName}">...</td>
+                    <td th:utext="${room.location}" th:id="location + ${room.roomName}" th:value="${room.location}">...</td>
+                    <td th:utext="${room.maxSeats}" th:id="maxSeats + ${room.roomName}" th:value="${room.maxSeats}">...</td>
                 </tr>
             </tbody>
         </table>

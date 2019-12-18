@@ -105,4 +105,17 @@ public class ConferenceServiceImpl implements ConferenceService {
             return null;
         }
     }
+
+    @Override
+    public Conference getConferenceByName(String name) {
+        try {
+            log.info("attempt to get conference by name");
+            Conference conference = conferenceRepository.getConferenceByConferenceName(name);
+            log.info("attempt to get conference by name - success");
+            return conference;
+        } catch (Exception e) {
+            log.warning("attempt to get conference by name - false\n" + e.getMessage());
+            return null;
+        }
+    }
 }

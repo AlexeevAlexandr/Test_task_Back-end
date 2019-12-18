@@ -10,4 +10,6 @@ import java.time.LocalDateTime;
 public interface ConferenceRepository extends MongoRepository<Conference, String> {
 
     void deleteConferenceByConferenceName(String name);
+
+    Conference getConferenceByConferenceName(String name);
 }

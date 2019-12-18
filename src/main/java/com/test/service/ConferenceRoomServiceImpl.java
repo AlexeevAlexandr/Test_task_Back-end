@@ -82,7 +82,7 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
     }
 
     @Override
-    public void deleteConferenceRoomByRoomName(String name) {
+    public void deleteByName(String name) {
         try {
             log.info("attempt to delete Conference room by name");
             conferenceRoomRepository.deleteConferenceRoomByRoomName(name);
@@ -114,6 +114,19 @@ public class ConferenceRoomServiceImpl implements ConferenceRoomService {
             return conferenceRooms;
         } catch (Exception e) {
             log.warning("attempt to get allAvailable rooms by seats number - false\n" + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public ConferenceRoom getConferenceRoomByName(String name) {
+        try {
+            log.info("attempt to get conference room by name");
+            ConferenceRoom conferenceRoom = conferenceRoomRepository.findConferenceRoomByRoomName(name);
+            log.info("attempt to get conference room by name - success");
+            return conferenceRoom;
+        } catch (Exception e) {
+            log.warning("attempt to get conference room by name - false\n" + e.getMessage());
             return null;
         }
     }

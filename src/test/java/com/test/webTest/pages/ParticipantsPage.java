@@ -22,9 +22,6 @@ public class ParticipantsPage extends PageObject {
     @FindBy(id = "submitPeter Nolan")
     private WebElement submit;
 
-    @FindBy(id = "resetPeter Nolan")
-    private WebElement reset;
-
     @FindBy(id = "participantNamePeter Nolan")
     private WebElement participantName;
 
@@ -38,11 +35,6 @@ public class ParticipantsPage extends PageObject {
     public void submitDeleteParticipant() {
         delete.click();
         submit.click();
-    }
-
-    public void resetDeleteParticipant() {
-        delete.click();
-        reset.click();
     }
 
     public List participantData() {
